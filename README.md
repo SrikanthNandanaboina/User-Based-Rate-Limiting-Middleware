@@ -17,6 +17,10 @@ How to run
 ```ruby
 npm start
 ```
+How to run unit tests
+```ruby
+npm test
+```
 
 # Protected Routes
 To use the Concurrent User Limit Middleware in your application, you can apply it to specific routes that require limiting concurrent users. For example:
