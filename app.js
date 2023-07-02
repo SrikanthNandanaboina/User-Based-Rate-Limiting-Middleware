@@ -3,7 +3,7 @@ const express = require("express");
 const http = require("http");
 const app = express();
 
-const maxConcurrentUsers = 3;
+let maxConcurrentUsers = 3;
 let activeUsersCount = 0;
 const userQueue = [];
 let isShuttingDown = false;
@@ -66,6 +66,19 @@ app.get("/queue", concurrentUserLimitMiddleware, (req, res) => {
   function clear() {
     clearTimeout(timer);
   }
+});
+
+app.get("/user-limit", (req, res) => {
+  const { limit } = req.query;
+
+  if (limit > 0) {
+    maxConcurrentUsers = limit;
+    return res
+      .status(200)
+      .json({ message: "Max concurrent users limit increased." });
+  }
+
+  res.status(400).json({ message: "Invalid limit" });
 });
 
 const appServer = app.listen(3000, () => {
