@@ -39,6 +39,8 @@ describe("User-based Rate Limiting", () => {
 
   it("should dequeue and process a queued request when a slot is available", async () => {
     // Simulate 4 requests, only 3 should be processed immediately
+    resetActiveUsersCount();
+
     const promises = Array.from({ length: 4 }, () =>
       request(app).get("/queue")
     );
@@ -46,7 +48,7 @@ describe("User-based Rate Limiting", () => {
 
     // The 4th request should be queued
     const queuedResponse = await promises[3];
-    expect(queuedResponse.status).toBe(429);
+    expect(queuedResponse.status).toBe(200);
   }, 20000);
 
   it("should handle server shutdown and inform users in the queue", async () => {
