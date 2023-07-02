@@ -50,6 +50,13 @@ Example: To increase the concurrent user limit to 5, send a GET request to /user
 curl http://localhost:3000/user-limit?limit=5
 ```
 
+# Testing the concurrent requests execution
+
+Execute the below code in the terminal to see the execution process of max concurrent requests at a time.
+```ruby
+curl --location 'http://127.0.0.1:3000/queue' & curl --location 'http://127.0.0.1:3000/queue' & curl --location 'http://127.0.0.1:3000/queue' & curl --location 'http://127.0.0.1:3000/queue' & curl --location 'http://127.0.0.1:3000/queue' & curl --location 'http://127.0.0.1:3000/queue' & curl --location 'http://127.0.0.1:3000/queue' & curl --location 'http://127.0.0.1:3000/queue' & curl --location 'http://127.0.0.1:3000/queue'
+```
+
 # Graceful Server Shutdown
 To gracefully shut down the server, you can send a SIGINT signal (e.g., using Ctrl+C) to trigger the shutdown process.
 
